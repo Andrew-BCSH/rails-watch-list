@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List Details</title>
+  <link rel="stylesheet" href="<%= asset_path('styles.css') %>">
+</head>
+<body>
+  <div class="container">
+    <h1 style="color: white;">Pile it up</h1>
+
+    <%= simple_form_for @list do |f| %>
+      <div class="form-group">
+        <%= f.input :name, class: "form-control", style: "background-color: rgba(255, 0, 0, 0.1);" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Save List", class: "btn btn-primary btn-red" %>
+      </div>
+    <% end %>
+  </div>
+</body>
+</html>

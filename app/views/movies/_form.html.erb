@@ -1,0 +1,26 @@
+<!-- app/views/movies/_form.html.erb -->
+<%= form_with model: movie do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :overview %>
+    <%= form.text_area :overview %>
+  </div>
+
+  <div class="field">
+    <%= form.label :poster_url %>
+    <%= form.text_field :poster_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating, step: 0.1 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

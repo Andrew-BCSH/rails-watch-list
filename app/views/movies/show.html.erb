@@ -1,0 +1,41 @@
+<!-- app/views/movies/show.html.erb -->
+
+<h1><%= @movie.title %></h1>
+<p><%= @movie.overview %></p>
+<p>Rating: <%= @movie.rating %></p>
+<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Back', movies_path %>
+<h2>Bookmarks</h2>
+
+<ul>
+  <% @movie.bookmarks.each do |bookmark| %>
+    <li>
+      <% if bookmark.list.present? %>
+        <%= bookmark.list.name %> - <%= bookmark.comments %>
+        <%= link_to 'Delete Bookmark', bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% else %>
+        Invalid Bookmark - <%= bookmark.comments %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+
+<h2>Add Bookmark</h2>
+<%= form_with model: @bookmark, url: movie_bookmarks_path(@movie) do |form| %>
+  <div class="field">
+    <%= form.label :list_id, "Select a List" %>
+    <%= form.collection_select :list_id, List.all, :id, :name, prompt: "Select a List" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comments, "Comments" %>
+    <%= form.text_field :comments, placeholder: "Comments" %>
+  </div>
+
+  <%= form.submit "Add Bookmark" %>
+<% end %>
+
+
+<%= link_to 'Back', movies_path %>

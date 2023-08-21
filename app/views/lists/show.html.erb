@@ -1,0 +1,109 @@
+
+<!-- app/views/lists/index.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Lists</title>
+  <link rel="stylesheet" href="<%= asset_path('styles.css') %>">
+</head>
+<body>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    .bookmarks {
+      margin-top: 10px;
+    }
+
+    .bookmark {
+      border: 1px solid #f00;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #222;
+    }
+
+    .bookmark h3 {
+      margin: 0;
+      color: #fff;
+    }
+
+    .bookmark p {
+      margin: 5px 0;
+    }
+
+    form {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 5px;
+    }
+
+    .btn {
+      background-color: #f00;
+      color: #fff;
+      padding: 5px 15px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #d00;
+    }
+  </style>
+</head>
+<body>
+
+  <h1><%= @list.name %></h1>
+<h2>Bookmarks</h2>
+<div class="bookmarks">
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="bookmark">
+      <h3><%= bookmark.movie.title %></h3>
+      <p><%= bookmark.comment %></p>
+    </div>
+  <% end %>
+</div>
+
+<h2>Add a new movie</h2>
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "see all lists", lists_path %>
+</body>
+</html>
